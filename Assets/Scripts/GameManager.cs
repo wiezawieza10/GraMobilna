@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public List<int> xpTable;
 
     public Player player;
-
+    public Weapon weapon;
     public FloatingTextManager floatingTextManager;
     public int pesos;
     public int experience;
@@ -36,6 +36,65 @@ public class GameManager : MonoBehaviour
     {
         floatingTextManager.Show(msg, fontSize, color, position, motion, duration);
     }
+
+    public bool TryUpgradeWeapon()
+    {
+        if (weaponPrices.Count <= weapon.weaponLevel)
+            return false;
+
+        if(pesos >= weaponPrices[weapon.weaponLevel])
+        {
+            pesos -= weaponPrices[weapon.weaponLevel];
+            weapon.UpgradeWeapon();
+            return true;
+        }
+
+        return false;
+    }
+
+    public int GetXpToLevel(int level)
+    {
+        int r = 0;
+        int xp = 0;
+
+        while (r < level)
+        {
+            xp += xpTable[r];
+            r++;
+        }
+
+        return xp;
+    }
+    public int GetCurrentLevel()
+    {
+        int r = 0;
+        int add = 0;
+
+        while(experience >= add)
+        {
+            add += xpTable[r];
+            r++;
+
+            if (r == xpTable.Count)
+                return r;
+        }
+
+        return r;
+    }
+
+    public void GrantXp(int xp)
+    {
+        int currLevel = GetCurrentLevel();
+        experience += xp;
+        if (currLevel < GetCurrentLevel())
+            OnLevelUp();
+    }
+
+    public void OnLevelUp()
+    {
+        Debug.Log("Level up");
+        player.OnLevelUp();
+    }    
     public void SaveState()
     {
         Debug.Log("Saving");
@@ -56,6 +115,8 @@ public class GameManager : MonoBehaviour
         string[] data = PlayerPrefs.GetString("SaveState").Split('|');
         pesos = int.Parse(data[1]);
         experience = int.Parse(data[2]);
+        if(GetCurrentLevel() != 1)
+            player.SetLevel(GetCurrentLevel());
         Debug.Log("Loading");
     }
 }

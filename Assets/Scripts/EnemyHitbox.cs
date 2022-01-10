@@ -19,7 +19,7 @@ public class EnemyHitbox : Collidable
 
             };
 
-            coll.SendMessage("ReceiveDamage", dmg);
+            //coll.SendMessage("ReceiveDamage", dmg);
         }
     }
 }

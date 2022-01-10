@@ -5,8 +5,8 @@ using UnityEngine;
 public class Weapon : Collidable
 {
     // Damage
-    public int damagePoint = 1;
-    public float pushForce = 2.0f;
+    public int[] damagePoint = { 1, 2, 3, 4, 5, 6, 7, 8 };
+    public float[] pushForce = { 2.0f, 2.2f, 2.4f, 2.6f, 2.8f, 3.0f, 3.4f, 4.0f };
 
     //upgrade
     public int weaponLevel = 0;
@@ -28,7 +28,7 @@ public class Weapon : Collidable
     {
         base.Update();
         if (Input.GetKeyDown(KeyCode.Space))
-            if(Time.time - lastSwing > cooldown)
+            if (Time.time - lastSwing > cooldown)
             {
                 lastSwing = Time.time;
                 Swing();
@@ -44,9 +44,9 @@ public class Weapon : Collidable
 
             Damage dmg = new Damage
             {
-                damageAmount = damagePoint,
+                damageAmount = damagePoint[weaponLevel],
                 origin = transform.position,
-                pushForce = pushForce
+                pushForce = pushForce[weaponLevel]
 
             };
 
@@ -56,6 +56,13 @@ public class Weapon : Collidable
     private void Swing()
     {
         anim.SetTrigger("Swing");
+
+    }
+
+    public void UpgradeWeapon()
+    {
+        weaponLevel++;
+        spriteRenderer.sprite = GameManager.instance.weaponSprites[weaponLevel];
 
     }
 }
