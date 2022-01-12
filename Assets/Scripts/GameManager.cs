@@ -5,21 +5,26 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
     private void Awake()
     {
-        if (GameManager.instance != null)
+        Debug.Log("GameManager awake");
+        if (instance != null)
         {
+            Debug.Log("Other GameManager instance found");
             Destroy(gameObject);
+            Destroy(player.gameObject);
+            Destroy(floatingTextManager.gameObject);
+            Destroy(hud);
+            Destroy(menu);
             return;
         }
 
+        //PlayerPrefs.DeleteAll();
         instance = this;
         SceneManager.sceneLoaded += LoadState;
-        DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
     }
-
     public List<Sprite> playerSprites;
     public List<Sprite> weaponSprites;
     public List<int> weaponPrices;
@@ -30,8 +35,10 @@ public class GameManager : MonoBehaviour
     public FloatingTextManager floatingTextManager;
     public int pesos;
     public int experience;
-
-
+    public RectTransform hitpointBar;
+    public GameObject hud;
+    public GameObject menu;
+    public Animator deathMenu;
     public void ShowText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
     {
         floatingTextManager.Show(msg, fontSize, color, position, motion, duration);
@@ -50,6 +57,12 @@ public class GameManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void OnHitpointChange()
+    {
+        float ratio = (float)player.hitpoint / (float)player.maxHitpoint;
+        hitpointBar.localScale = new Vector3(1, ratio, 1);
     }
 
     public int GetXpToLevel(int level)
@@ -94,29 +107,60 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Level up");
         player.OnLevelUp();
+        OnHitpointChange();
     }    
+    /*
+     * skin
+     * pesos
+     * experience
+     * weaponLevel
+     */
+
     public void SaveState()
     {
         Debug.Log("Saving");
         string s = "";
         s += "0" + "|";
         s += pesos.ToString() + "|";
-        s += experience + "|";
-        s += "0";
-        PlayerPrefs.SetString("SaveState",s);
-
+        s += experience.ToString() + "|";
+        s += weapon.weaponLevel.ToString();
+        PlayerPrefs.SetString("SaveState", s);
+        Debug.Log("SAVE STATE ENDED");
     }
 
+    public void OnSceneLoaded(Scene s, LoadSceneMode mode)
+    {
+        GameObject.Find("Player").transform.position = GameObject.Find("SpawnPoint").transform.position;
+    }
     public void LoadState(Scene s, LoadSceneMode mode)
     {
+        Debug.Log("LOAD STATE STARTED");
+        SceneManager.sceneLoaded -= LoadState;
         if (!PlayerPrefs.HasKey("SaveState"))
+        {
+            Debug.Log("Save not found");
             return;
-
+        }
         string[] data = PlayerPrefs.GetString("SaveState").Split('|');
+        Debug.Log(PlayerPrefs.GetString("SaveState").ToString());
         pesos = int.Parse(data[1]);
         experience = int.Parse(data[2]);
-        if(GetCurrentLevel() != 1)
+
+        if (GetCurrentLevel() != 1)
             player.SetLevel(GetCurrentLevel());
-        Debug.Log("Loading");
+        weapon.SetWeaponLevel(int.Parse(data[3]));
+        Debug.Log("Game Loaded");
+    }
+
+    public void Respawn()
+    {
+        deathMenu.SetTrigger("Hide");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        player.Respawn();
+    }
+
+    private void OnApplicationQuit()
+    {
+        //SaveState();
     }
 }

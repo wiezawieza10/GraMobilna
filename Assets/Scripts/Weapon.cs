@@ -10,7 +10,7 @@ public class Weapon : Collidable
 
     //upgrade
     public int weaponLevel = 0;
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
 
     //Swing
     private Animator anim;
@@ -64,5 +64,11 @@ public class Weapon : Collidable
         weaponLevel++;
         spriteRenderer.sprite = GameManager.instance.weaponSprites[weaponLevel];
 
+    }
+
+    public void SetWeaponLevel(int level)
+    {
+        weaponLevel = level;
+        spriteRenderer.sprite = GameManager.instance.weaponSprites[weaponLevel];
     }
 }

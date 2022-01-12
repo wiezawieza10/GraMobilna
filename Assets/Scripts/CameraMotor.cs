@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class CameraMotor : MonoBehaviour
 {
-    public Transform lookAt;
+    private Transform lookAt;
     public float boundX = 0.55f;
     public float boundY = 0.25f;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        lookAt = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    private void LateUpdate()
     {
         Vector3 delta = Vector3.zero;
         // this is to check if we're inside the bounds on the X axis
