@@ -7,9 +7,9 @@ public abstract class Mover : Fighter
     protected BoxCollider2D boxCollider;
     protected Vector3 moveDelta;
     protected RaycastHit2D hit;
-    protected float ySpeed = 0.75f;
-    protected float xSpeed = 1.0f;
-
+    protected float ySpeed = 0.55f;
+    protected float xSpeed = 0.7f;
+    public Animator animator;
     
     protected virtual void Start()
     {
@@ -22,6 +22,14 @@ public abstract class Mover : Fighter
 
         //Reset MoveDelta
         moveDelta = new Vector3(input.x * xSpeed, input.y * ySpeed, 0);
+
+        //Change animation to 'run' state
+        if(moveDelta.x != 0 || moveDelta.y != 0)
+        {
+            animator.SetBool("running", true);
+        }
+        else
+            animator.SetBool("running", false);
         //Swap sprite direction, wether you're going right or left
         if (moveDelta.x > 0)
             transform.localScale = Vector3.one;

@@ -51,9 +51,9 @@ TagManager:
   - name: Interactable
     uniqueID: 2199493755
     locked: 0
-  - name: Actor
-    uniqueID: 2231739401
-    locked: 0
   - name: Weapon
     uniqueID: 2276619597
+    locked: 0
+  - name: Actor
+    uniqueID: 2231739401
     locked: 0

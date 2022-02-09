@@ -22,6 +22,7 @@ public class Weapon : Collidable
         base.Start();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        
     }
 
     protected override void Update()
