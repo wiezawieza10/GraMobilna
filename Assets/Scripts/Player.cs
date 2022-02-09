@@ -42,8 +42,8 @@ public class Player : Mover
 
     public void OnLevelUp()
     {
-        maxHitpoint++;
-        hitpoint = maxHitpoint;
+        maxHealth++;
+        currentHealth = maxHealth;
     }
 
     public void SetLevel(int level)
@@ -54,19 +54,27 @@ public class Player : Mover
 
     public void Heal(int healingAmount)
     {
-        if (hitpoint == maxHitpoint)
+        if (currentHealth == maxHealth)
             return;
 
-        hitpoint += healingAmount;
-        if (hitpoint > maxHitpoint)
-            hitpoint = maxHitpoint;
+        currentHealth += healingAmount;
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
         GameManager.instance.ShowText("+" + healingAmount.ToString() + "hp", 25, Color.green, transform.position, Vector3.up * 30, 1.0f);
         GameManager.instance.OnHitpointChange();
     }
 
+    public void usePotion(int healingAmount)
+    {
+        if (GameManager.instance.potionsCount > 0 && currentHealth < maxHealth)
+        {
+            Heal(healingAmount);
+            GameManager.instance.potionsCount--;
+        }
+    }
     public void Respawn()
     {
-        Heal(maxHitpoint);
+        Heal(maxHealth);
         isAlive = true;
         lastImmune = Time.time;
         pushDirection = Vector3.zero;

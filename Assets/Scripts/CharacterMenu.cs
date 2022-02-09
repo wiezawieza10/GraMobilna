@@ -46,7 +46,7 @@ public class CharacterMenu : MonoBehaviour
 
     public void UpdateMenu()
     {
-        hitpointText.text = GameManager.instance.player.hitpoint.ToString();
+        hitpointText.text = GameManager.instance.player.currentHealth.ToString();
         pesosText.text = GameManager.instance.pesos.ToString();
         levelText.text = GameManager.instance.GetCurrentLevel().ToString();
         weaponSprite.sprite = GameManager.instance.weaponSprites[GameManager.instance.weapon.weaponLevel];
