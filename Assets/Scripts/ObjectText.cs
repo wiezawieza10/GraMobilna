@@ -21,7 +21,7 @@ public class ObjectText : Collidable
         if(Time.time - lastShout > cooldown)
         {
             lastShout = Time.time;
-            GameManager.instance.ShowText(message, 25, Color.white, transform.position + new Vector3(0, 0.16f, 0), Vector3.zero, 4.0f);
+            GameManager.instance.ShowText(message, 25, Color.white, transform.position + new Vector3(0, 0.16f, 0), Vector3.zero, 2.0f);
         }
     }
 }
