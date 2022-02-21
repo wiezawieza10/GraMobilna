@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "420159284536",
+    "project_id": "elcid-74dae",
+    "storage_bucket": "elcid-74dae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420159284536:android:c8d40306981e577f4e0dcd",
+        "android_client_info": {
+          "package_name": "com.ElCid.ElCid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "420159284536-p378mkt6p8isg0hrdcj5voacjnt64gaf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrpXWA6T-t3CpRn3rlwHwl1opa-v-1SIw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "420159284536-p378mkt6p8isg0hrdcj5voacjnt64gaf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

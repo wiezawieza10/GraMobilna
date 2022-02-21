@@ -13,6 +13,8 @@ public class Dialog : MonoBehaviour
     public GameObject DialogueBox;
     public GameObject HUD;
     public GameObject Menu;
+    public GameObject Player;
+    public GameObject weapon;
     private void Start()
     {
         StartCoroutine(Type());
@@ -40,6 +42,7 @@ public class Dialog : MonoBehaviour
     public void NextSentence()
     {
         textDisplayAnim.SetTrigger("Change");
+        Debug.Log("XXX");
         continueButton.SetActive(false);
         if(index < sentences.Length - 1)
         {
@@ -53,6 +56,8 @@ public class Dialog : MonoBehaviour
             DialogueBox.SetActive(false);
             HUD.SetActive(true);
             Menu.SetActive(true);
+            Player.GetComponent<SpriteRenderer>().flipX = false;
+            weapon.SetActive(true);
         }
     }
 }

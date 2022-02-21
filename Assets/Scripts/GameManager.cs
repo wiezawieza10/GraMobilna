@@ -5,6 +5,22 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public List<Sprite> playerSprites;
+    public List<Sprite> weaponSprites;
+    public List<int> weaponPrices;
+    public List<int> xpTable;
+
+    public Player player;
+    public Weapon weapon;
+    public FloatingTextManager floatingTextManager;
+    public int pesos;
+    public int experience;
+    public RectTransform hitpointBar;
+    public GameObject hud;
+    public int potionsCount;
+    public GameObject menu;
+    public Animator deathMenu;
+
     private void Awake()
     {
         Debug.Log("GameManager awake");
@@ -25,21 +41,6 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
 
     }
-    public List<Sprite> playerSprites;
-    public List<Sprite> weaponSprites;
-    public List<int> weaponPrices;
-    public List<int> xpTable;
-
-    public Player player;
-    public Weapon weapon;
-    public FloatingTextManager floatingTextManager;
-    public int pesos;
-    public int experience;
-    public RectTransform hitpointBar;
-    public GameObject hud;
-    public int potionsCount;
-    public GameObject menu;
-    public Animator deathMenu;
     public void ShowText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
     {
         floatingTextManager.Show(msg, fontSize, color, position, motion, duration);
@@ -100,6 +101,7 @@ public class GameManager : MonoBehaviour
     {
         int currLevel = GetCurrentLevel();
         experience += xp;
+        potionsCount++;
         if (currLevel < GetCurrentLevel())
             OnLevelUp();
     }
