@@ -20,7 +20,8 @@ public class GameManager : MonoBehaviour
     public int potionsCount;
     public GameObject menu;
     public Animator deathMenu;
-
+    public bool isAttackButtonDown;
+    public bool notInDialog;
     private void Awake()
     {
         Debug.Log("GameManager awake");
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         SceneManager.sceneLoaded += LoadState;
         SceneManager.sceneLoaded += OnSceneLoaded;
-
+        GameManager.instance.notInDialog = true;
     }
     public void ShowText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
     {
@@ -164,6 +165,6 @@ public class GameManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        //SaveState();
+        SaveState();
     }
 }

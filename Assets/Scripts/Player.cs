@@ -7,7 +7,7 @@ public class Player : Mover
 {
     private SpriteRenderer spriteRenderer;
     private bool isAlive = true;
-
+    public Joystick joystick;
     protected override void Start()
     {
         base.Start();
@@ -28,11 +28,14 @@ public class Player : Mover
     }
     private void FixedUpdate()
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
+        float x = joystick.Horizontal;
+        float y = joystick.Vertical;
 
-        if(isAlive)
+        if(isAlive && GameManager.instance.notInDialog)
             UpdateMotor(new Vector3(x, y, 0));
+        
+        if(GameManager.instance.notInDialog == false)
+            UpdateMotor(new Vector3(0, 0, 0));
     }
 
     public void SwapSprite(int skinId)
@@ -42,7 +45,7 @@ public class Player : Mover
 
     public void OnLevelUp()
     {
-        maxHealth++;
+        maxHealth += 2;
         currentHealth = maxHealth;
     }
 

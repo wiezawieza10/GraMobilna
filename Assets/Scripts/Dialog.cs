@@ -12,19 +12,19 @@ public class Dialog : MonoBehaviour
     public Animator textDisplayAnim;
     public GameObject DialogueBox;
     public GameObject HUD;
-    public GameObject Menu;
     public GameObject Player;
-    public GameObject weapon;
+    public GameObject Weapon;
     private void Start()
     {
         StartCoroutine(Type());
+        HUD = GameObject.Find("HUD");
+        Player = GameObject.Find("Player");
         HUD.SetActive(false);
-        Menu.SetActive(false);
     }
 
     private void Update()
     {
-        if(textDisplay.text == sentences[index])
+        if (textDisplay.text == sentences[index])
         {
             continueButton.SetActive(true);
         }
@@ -42,7 +42,6 @@ public class Dialog : MonoBehaviour
     public void NextSentence()
     {
         textDisplayAnim.SetTrigger("Change");
-        Debug.Log("XXX");
         continueButton.SetActive(false);
         if(index < sentences.Length - 1)
         {
@@ -55,9 +54,8 @@ public class Dialog : MonoBehaviour
             continueButton.SetActive(false);
             DialogueBox.SetActive(false);
             HUD.SetActive(true);
-            Menu.SetActive(true);
             Player.GetComponent<SpriteRenderer>().flipX = false;
-            weapon.SetActive(true);
+            Weapon.SetActive(true);
         }
     }
 }
