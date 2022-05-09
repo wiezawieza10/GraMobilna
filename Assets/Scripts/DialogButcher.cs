@@ -23,6 +23,7 @@ public class DialogButcher : MonoBehaviour
         Player = GameObject.Find("Player");
         HUD.SetActive(false);
         GameManager.instance.notInDialog = false;
+        FindObjectOfType<AudioManager>().Play("HowCanIHelpYou");
     }
 
     private void Update()

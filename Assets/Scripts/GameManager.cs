@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     public Player player;
     public Weapon weapon;
+    public LevelLoader levelLoader;
     public FloatingTextManager floatingTextManager;
     public int pesos;
     public int experience;
@@ -19,9 +20,18 @@ public class GameManager : MonoBehaviour
     public GameObject hud;
     public int potionsCount;
     public GameObject menu;
+    public GameObject inGameMenu;
     public Animator deathMenu;
     public bool isAttackButtonDown;
     public bool notInDialog;
+    public int MaxHP;
+    public int currHP;
+    public string currMap;
+    public string savedMap;
+    public bool wasGameLoaded;
+    public int weaponLevele;
+    public bool isTransitioning;
+    public GameObject joystickHandle;
     private void Awake()
     {
         Debug.Log("GameManager awake");
@@ -33,14 +43,37 @@ public class GameManager : MonoBehaviour
             Destroy(floatingTextManager.gameObject);
             Destroy(hud);
             Destroy(menu);
-            return;
+            Destroy(inGameMenu);
+            Destroy(levelLoader);
         }
 
-        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
         instance = this;
         SceneManager.sceneLoaded += LoadState;
         SceneManager.sceneLoaded += OnSceneLoaded;
         GameManager.instance.notInDialog = true;
+
+    }
+
+    private void Update()
+    {
+        OnHitpointChange();
+        if (LoadedVals.instance.wasGameLoaded)
+        {
+            Debug.Log("WASGAMELOADEDSSSSSSSSS");
+            experience = LoadedVals.instance.LoadedExperience;
+            pesos = LoadedVals.instance.LoadedPesos;
+            potionsCount = LoadedVals.instance.LoadedPotionsCount;
+            player.maxHealth = LoadedVals.instance.LoadedMaxHP;
+            player.currentHealth = LoadedVals.instance.LoadedCurrHP;
+            weaponLevele = LoadedVals.instance.LoadedWeaponLevele;
+
+            weapon.SetWeaponLevel(weaponLevele);
+            OnHitpointChange();
+            SceneManager.LoadScene(LoadedVals.instance.LoadedSavedMap);
+            LoadedVals.instance.wasGameLoaded = false;
+            Debug.Log("Finished Loading");
+        }
     }
     public void ShowText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
     {
@@ -65,6 +98,8 @@ public class GameManager : MonoBehaviour
     public void OnHitpointChange()
     {
         float ratio = (float)player.currentHealth / (float)player.maxHealth;
+        MaxHP = player.maxHealth;
+        currHP = player.currentHealth;
         hitpointBar.localScale = new Vector3(1, ratio, 1);
     }
 
@@ -120,7 +155,7 @@ public class GameManager : MonoBehaviour
      * weaponLevel
      */
 
-    public void SaveState()
+            public void SaveState()
     {
         Debug.Log("Saving");
         string s = "";
@@ -134,7 +169,11 @@ public class GameManager : MonoBehaviour
 
     public void OnSceneLoaded(Scene s, LoadSceneMode mode)
     {
-        GameObject.Find("Player").transform.position = GameObject.Find("SpawnPoint").transform.position;
+        if(GameObject.Find("Player"))
+            GameObject.Find("Player").transform.position = GameObject.Find("SpawnPoint").transform.position;
+        
+        currMap = SceneManager.GetActiveScene().name;
+        joystickHandle.transform.position = new Vector3(0, 0, 0);
     }
     public void LoadState(Scene s, LoadSceneMode mode)
     {

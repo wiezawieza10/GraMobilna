@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Firebase;
 using Firebase.Auth;
+using Firebase.Database;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System;
 
 public class AuthManager : MonoBehaviour
@@ -15,6 +17,7 @@ public class AuthManager : MonoBehaviour
     public DependencyStatus dependencyStatus;
     public FirebaseAuth auth;
     public FirebaseUser User;
+    public DatabaseReference DBreference;
 
     //Login variables
     [Header("Login")]
@@ -50,6 +53,7 @@ public class AuthManager : MonoBehaviour
         Debug.Log("Setting up Firebase Auth");
         //Set the authentication instance object
         auth = FirebaseAuth.DefaultInstance;
+        DBreference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
     //Function for the login button
@@ -107,13 +111,42 @@ public class AuthManager : MonoBehaviour
             //Now get the result
             User = LoginTask.Result;
             Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
+            StartCoroutine(LoadUserData());
             warningLoginText.color = Color.green;
             warningLoginText.text = "Game Loaded from Database";
             yield return new WaitForSeconds(1);
+            //SceneManager.LoadScene("Main", LoadSceneMode.Single);
             MainMenuUI.SetActive(true);
             loginUI.SetActive(false);
             NewGameText.text = "Continue";
             LoadGameButton.interactable = false;
+        }
+    }
+
+    private IEnumerator LoadUserData()
+    {
+        LoadedVals.instance.wasGameLoaded = true;
+        //Get the currently logged in user data
+        var DBTask = DBreference.Child("users").Child(User.UserId).GetValueAsync();
+
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        }
+        else
+        {
+            //Data has been retrieved
+            DataSnapshot snapshot = DBTask.Result;
+
+            LoadedVals.instance.LoadedExperience = int.Parse(snapshot.Child("xp").Value.ToString());
+            LoadedVals.instance.LoadedPotionsCount = int.Parse(snapshot.Child("potions").Value.ToString());
+            LoadedVals.instance.LoadedPesos = int.Parse(snapshot.Child("monety").Value.ToString());
+            LoadedVals.instance.LoadedSavedMap = snapshot.Child("currentMap").Value.ToString();
+            LoadedVals.instance.LoadedWeaponLevele = int.Parse(snapshot.Child("weaponLvl").Value.ToString());
+            LoadedVals.instance.LoadedCurrHP = int.Parse(snapshot.Child("currentHP").Value.ToString());
+            LoadedVals.instance.LoadedMaxHP = int.Parse(snapshot.Child("maxHP").Value.ToString());
         }
     }
 

@@ -704,7 +704,7 @@ RectTransform:
   - {fileID: 153688540}
   - {fileID: 773164069}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2221,7 +2221,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 773164069}
-  - component: {fileID: 773164068}
   m_Layer: 5
   m_Name: CreditsScreen
   m_TagString: Untagged
@@ -2229,21 +2228,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &773164068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773164067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c516f17ec8c1e944593882eda19e85f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loginUI: {fileID: 153688539}
-  mainMenuUI: {fileID: 773164067}
-  CreditsUI: {fileID: 0}
 --- !u!224 &773164069
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3651,6 +3635,147 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121016957}
   m_CullTransparentMesh: 1
+--- !u!1 &1162087565
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1162087568}
+  - component: {fileID: 1162087567}
+  - component: {fileID: 1162087566}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1162087566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162087565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36995714995b50a41979b6e37955b848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1162087567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162087565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8789ba49a3a7d624f9d43b634b98277f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: potionDrink
+    clip: {fileID: 8300000, guid: d1ca39d10472b9541a9d1991a729022a, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: swing1
+    clip: {fileID: 8300000, guid: 9ca17fcbbcaa32c46bc3c386f0372af4, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: swing2
+    clip: {fileID: 8300000, guid: 705e514303da241449deeffd71d1d083, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: swing3
+    clip: {fileID: 8300000, guid: c45564a8ace6bb94f81f5402409e9e58, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: weaponUpgrade
+    clip: {fileID: 8300000, guid: 5191b63b44e76fb4dbfc8f024ad5b6d6, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: coinChest
+    clip: {fileID: 8300000, guid: cf542decfcd94da4cb5c83679eebe3c4, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: respawn
+    clip: {fileID: 8300000, guid: c2d28fdd6d22986418be75baec431941, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: menu-theme
+    clip: {fileID: 8300000, guid: a10b89869a77dd8429f2a43ecc96e889, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: background-main
+    clip: {fileID: 8300000, guid: 4b79925df97808b43a3cdb06b5923b5c, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: background-dungeon
+    clip: {fileID: 8300000, guid: 3260eab1a42336b42b72fe448d6f71e2, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: background-endScene
+    clip: {fileID: 8300000, guid: 09798bba10a89e54cb36a7f0b855c0ca, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: enemyDeath
+    clip: {fileID: 8300000, guid: 695a525a9b2ad634b9d1c81b7b16da47, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: HowCanIHelpYou
+    clip: {fileID: 8300000, guid: dfb5e01f6394bc44b86b961bbe0f9162, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: player-getHit
+    clip: {fileID: 8300000, guid: 60372aafe3b06d140a7a6fc5836425de, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+--- !u!4 &1162087568
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162087565}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1184094063
 GameObject:
   m_ObjectHideFlags: 0
@@ -3842,7 +3967,7 @@ RectTransform:
   m_Children:
   - {fileID: 112228862}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5576,8 +5701,72 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1906425814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1906425816}
+  - component: {fileID: 1906425815}
+  - component: {fileID: 1906425817}
+  m_Layer: 0
+  m_Name: LoadedVals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1906425815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906425814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 512fe26b3ae82a74687b6ad028f01039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoadedPesos: 0
+  LoadedExperience: 0
+  LoadedPotionsCount: 0
+  LoadedMaxHP: 0
+  LoadedCurrHP: 0
+  LoadedSavedMap: 
+  wasGameLoaded: 0
+  LoadedWeaponLevele: 0
+--- !u!4 &1906425816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906425814}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1046.3634, y: 440.4167, z: -226.45374}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1906425817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906425814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36995714995b50a41979b6e37955b848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2042010467
 GameObject:
   m_ObjectHideFlags: 0
@@ -5783,5 +5972,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

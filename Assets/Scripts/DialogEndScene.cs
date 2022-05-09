@@ -11,7 +11,6 @@ public class DialogEndScene : MonoBehaviour
     public GameObject continueButton;
     public Animator textDisplayAnim;
     public GameObject DialogueBox;
-    public GameObject Player;
     public GameObject NextSceneLoaderObj;
     private void Start()
     {

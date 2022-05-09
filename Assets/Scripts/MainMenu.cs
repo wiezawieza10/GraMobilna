@@ -8,6 +8,12 @@ public class MainMenu : MonoBehaviour
     public GameObject mainMenuUI;
     public GameObject CreditsUI;
 
+    
+    private void Start()
+    {
+        FindObjectOfType<AudioManager>().Stop("background-endScene");
+        FindObjectOfType<AudioManager>().Play("menu-theme");
+    }
     public void ShowLoginScreen() //Back button
     {
         loginUI.SetActive(true);
@@ -30,13 +36,20 @@ public class MainMenu : MonoBehaviour
     public void ReturnFromCredits()
     {
         mainMenuUI.SetActive(true);
-        loginUI.SetActive(false);
+        //loginUI.SetActive(false);
         CreditsUI.SetActive(false);
     }
 
     public void StartGame() //Back button
     {
-        SceneManager.LoadScene("MainStory", LoadSceneMode.Single);
+        if(LoadedVals.instance.wasGameLoaded)
+        {
+            SceneManager.LoadScene("Main", LoadSceneMode.Single);
+        }
+        else
+        {
+            SceneManager.LoadScene("MainStory", LoadSceneMode.Single);
+        }
     }
 
     public void GameExit()

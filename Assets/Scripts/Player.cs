@@ -19,6 +19,7 @@ public class Player : Mover
         if (!isAlive)
             return;
         base.ReceiveDamage(dmg);
+        FindObjectOfType<AudioManager>().Play("player-getHit");
         GameManager.instance.OnHitpointChange();
     }
     protected override void Death()
@@ -71,8 +72,11 @@ public class Player : Mover
     {
         if (GameManager.instance.potionsCount > 0 && currentHealth < maxHealth)
         {
-            Heal(healingAmount);
             GameManager.instance.potionsCount--;
+
+            FindObjectOfType<AudioManager>().Play("potionDrink");
+            Heal(healingAmount);
+
         }
     }
     public void Respawn()
@@ -81,5 +85,6 @@ public class Player : Mover
         isAlive = true;
         lastImmune = Time.time;
         pushDirection = Vector3.zero;
+        //FindObjectOfType<AudioManager>().Play("respawn");
     }
 }

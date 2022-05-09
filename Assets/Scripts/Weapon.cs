@@ -57,13 +57,15 @@ public class Weapon : Collidable
     private void Swing()
     {
         anim.SetTrigger("Swing");
-
+        FindObjectOfType<AudioManager>().Play("swing1");
     }
 
     public void UpgradeWeapon()
     {
         weaponLevel++;
+        GameManager.instance.weaponLevele = weaponLevel;
         spriteRenderer.sprite = GameManager.instance.weaponSprites[weaponLevel];
+        FindObjectOfType<AudioManager>().Play("weaponUpgrade");
 
     }
 

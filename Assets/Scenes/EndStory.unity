@@ -123,6 +123,62 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &172957528
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 172957531}
+  - component: {fileID: 172957530}
+  - component: {fileID: 172957529}
+  m_Layer: 0
+  m_Name: BM_EndScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &172957529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172957528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58bb0d03993f4a498f84aedff1873bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &172957530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172957528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36995714995b50a41979b6e37955b848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &172957531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172957528}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1229.0333, y: 577.2262, z: -39.68791}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &217902788
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,8 +568,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Nied\u0142ugo po tym odby\u0142 sie huczny \u015Blub i wesele El Cyda
-    z Jimen\u0105. Szcz\u0119\u015Bliwi ma\u0142\u017Conkowie doczekali si\u0119
+  m_Text: "Nied\u0142ugo po tym odby\u0142 si\u0119 \u015Blub i huczne wesele El
+    Cyda z Jimen\u0105. Szcz\u0119\u015Bliwi ma\u0142\u017Conkowie doczekali si\u0119
     tr\xF3jki potomstwa."
 --- !u!222 &1014151554
 CanvasRenderer:
