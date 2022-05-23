@@ -15,7 +15,7 @@ public class HealingFountain_Multiplayer : Collidable
         if(Time.time - lastHeal > healCooldown)
         {
             lastHeal = Time.time;
-            GameManager_Multiplayer.instance.player.Heal(healingAmount);
+            GameManager_Multiplayer.instance.Heal(healingAmount);
         }
     }
 }

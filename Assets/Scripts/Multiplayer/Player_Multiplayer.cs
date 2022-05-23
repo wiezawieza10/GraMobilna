@@ -8,6 +8,9 @@ public class Player_Multiplayer : Mover_Multiplayer
     private SpriteRenderer spriteRenderer;
     private bool isAlive = true;
     public Joystick joystick;
+    public int potionsCount;
+    public int pesos;
+    public int experience;
     protected override void Start()
     {
         base.Start();
@@ -50,11 +53,6 @@ public class Player_Multiplayer : Mover_Multiplayer
         }
     }
 
-    public void SwapSprite(int skinId)
-    {
-        spriteRenderer.sprite = GameManager_Multiplayer.instance.playerSprites[skinId];
-    }
-
     public void OnLevelUp()
     {
         maxHealth += 2;
@@ -67,33 +65,10 @@ public class Player_Multiplayer : Mover_Multiplayer
             OnLevelUp();
     }
 
-    public void Heal(int healingAmount)
-    {
-        if (currentHealth == maxHealth)
-            return;
-
-        currentHealth += healingAmount;
-        if (currentHealth > maxHealth)
-            currentHealth = maxHealth;
-        GameManager_Multiplayer.instance.ShowText("+" + healingAmount.ToString() + "hp", 25, Color.green, transform.position, Vector3.up * 30, 1.0f);
-        GameManager_Multiplayer.instance.OnHitpointChange();
-    }
-
-    public void usePotion(int healingAmount)
-    {
-        if (GameManager_Multiplayer.instance.potionsCount > 0 && currentHealth < maxHealth)
-        {
-            GameManager_Multiplayer.instance.potionsCount--;
-
-            FindObjectOfType<AudioManager>().Play("potionDrink");
-            Heal(healingAmount);
-
-        }
-    }
     [PunRPC]
     public void Respawn()
     {
-        Heal(maxHealth);
+        GameManager_Multiplayer.instance.Heal(maxHealth);
         isAlive = true;
         lastImmune = Time.time;
         pushDirection = Vector3.zero;
@@ -115,5 +90,12 @@ public class Player_Multiplayer : Mover_Multiplayer
     private void FlipFalse()
     {
         transform.localScale = Vector3.one;
+    }
+
+    [PunRPC]
+    public void UpgradePlayer2Weapon(int level)
+    {
+        GameManager_Multiplayer.instance.SetPlayer();
+        GameManager_Multiplayer.instance.player2.GetComponentInChildren<SpriteRenderer>().sprite = GameManager_Multiplayer.instance.weaponSprites[level];
     }
 }

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class Weapon_Multiplayer : Collidable
 {
     // Damage
@@ -48,7 +48,6 @@ public class Weapon_Multiplayer : Collidable
                 damageAmount = damagePoint[weaponLevel],
                 origin = transform.position,
                 pushForce = pushForce[weaponLevel]
-
             };
 
             coll.SendMessage("ReceiveDamage", dmg);
@@ -65,8 +64,8 @@ public class Weapon_Multiplayer : Collidable
         weaponLevel++;
         GameManager_Multiplayer.instance.weaponLevele = weaponLevel;
         spriteRenderer.sprite = GameManager_Multiplayer.instance.weaponSprites[weaponLevel];
+        GameManager_Multiplayer.instance.player.view.RPC("UpgradePlayer2Weapon", RpcTarget.OthersBuffered, weaponLevel);
         FindObjectOfType<AudioManager>().Play("weaponUpgrade");
-
     }
 
     public void SetWeaponLevel(int level)

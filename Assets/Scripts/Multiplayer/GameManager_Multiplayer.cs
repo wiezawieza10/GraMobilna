@@ -12,14 +12,12 @@ public class GameManager_Multiplayer : MonoBehaviour
     public List<int> xpTable;
 
     public Player_Multiplayer player;
+    public Player_Multiplayer player2;
     public Weapon_Multiplayer weapon;
     public LevelLoader_Multiplayer levelLoader;
     public FloatingTextManager floatingTextManager;
-    public int pesos;
-    public int experience;
     public RectTransform hitpointBar;
     public GameObject hud;
-    public int potionsCount;
     public GameObject menu;
     public GameObject inGameMenu;
     public Animator deathMenu;
@@ -46,6 +44,18 @@ public class GameManager_Multiplayer : MonoBehaviour
             Destroy(inGameMenu);
             Destroy(levelLoader);
         }
+
+        if (SceneManager.GetActiveScene().name == "StartMenu")
+        {
+            
+            Destroy(player.gameObject);
+            Destroy(floatingTextManager.gameObject);
+            Destroy(hud);
+            Destroy(menu);
+            Destroy(inGameMenu);
+            Destroy(levelLoader);
+            Destroy(gameObject);
+        }
         instance = this;
         SceneManager.sceneLoaded += OnSceneLoaded;
         notInDialog = true;
@@ -67,9 +77,9 @@ public class GameManager_Multiplayer : MonoBehaviour
         if (weaponPrices.Count <= weapon.weaponLevel)
             return false;
 
-        if(pesos >= weaponPrices[weapon.weaponLevel])
+        if(player.pesos >= weaponPrices[weapon.weaponLevel])
         {
-            pesos -= weaponPrices[weapon.weaponLevel];
+            player.pesos -= weaponPrices[weapon.weaponLevel];
             weapon.UpgradeWeapon();
             return true;
         }
@@ -101,7 +111,7 @@ public class GameManager_Multiplayer : MonoBehaviour
         int r = 0;
         int add = 0;
 
-        while(experience >= add)
+        while(player.experience >= add)
         {
             add += xpTable[r];
             r++;
@@ -116,8 +126,8 @@ public class GameManager_Multiplayer : MonoBehaviour
     public void GrantXp(int xp)
     {
         int currLevel = GetCurrentLevel();
-        experience += xp;
-        potionsCount++;
+        player.experience += xp;
+        player.potionsCount++;
         if (currLevel < GetCurrentLevel())
             OnLevelUp();
     }
@@ -131,10 +141,22 @@ public class GameManager_Multiplayer : MonoBehaviour
 
     public void OnSceneLoaded(Scene s, LoadSceneMode mode)
     {
-        var x = FindObjectsOfType<Player_Multiplayer>();
-        if (x.Length > 0 )
-            for (var i =0; i < x.Length; ++i)
-                x[i].transform.position = GameObject.Find("SpawnPoint").transform.position;
+        if (SceneManager.GetActiveScene().name == "StartMenu")
+        {
+            Destroy(player.gameObject);
+            Destroy(floatingTextManager.gameObject);
+            Destroy(hud);
+            Destroy(menu);
+            Destroy(inGameMenu);
+            Destroy(levelLoader);
+            Destroy(gameObject);
+            return;
+        }
+
+            var players = FindObjectsOfType<Player_Multiplayer>();
+        if (players.Length > 0 )
+            for (var i =0; i < players.Length; ++i)
+                players[i].transform.position = GameObject.Find("SpawnPoint").transform.position;
         currMap = SceneManager.GetActiveScene().name;
         if(joystickHandle != null && currMap != "Main_Multiplayer")
             joystickHandle.transform.localPosition = new Vector3(0, 0, 0);
@@ -156,7 +178,13 @@ public class GameManager_Multiplayer : MonoBehaviour
             for (var i = 0; i < players.Length; ++i)
             {
                 if (players[i].GetComponent<PhotonView>().IsMine)
+                {
+
                     player = players[i];
+                    
+                }
+                else
+                    player2 = players[i];
             }
         else
             player = FindObjectOfType<Player_Multiplayer>();
@@ -185,9 +213,9 @@ public class GameManager_Multiplayer : MonoBehaviour
     }
     public void usePotion(int healingAmount)
     {
-        if (potionsCount > 0 && player.currentHealth < player.maxHealth)
+        if (player.potionsCount > 0 && player.currentHealth < player.maxHealth)
         {
-            potionsCount--;
+            player.potionsCount--;
 
             FindObjectOfType<AudioManager>().Play("potionDrink");
             Heal(healingAmount);

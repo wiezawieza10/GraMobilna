@@ -13,7 +13,7 @@ public class Chest_Multiplayer : Collectable
             collected = true;
 
             GetComponent<SpriteRenderer>().sprite = emptyChest;
-            GameManager_Multiplayer.instance.pesos += pesosAmount;
+            GameManager_Multiplayer.instance.player.pesos += pesosAmount;
             GameManager_Multiplayer.instance.ShowText("+" + pesosAmount + " coins", 25, Color.yellow, transform.position, Vector3.up * 50, 1.0f);
             FindObjectOfType<AudioManager>().Play("coinChest");
         }

@@ -48,6 +48,7 @@ MonoBehaviour:
   - CrateDeathRPC
   - EnemyDeathRPC
   - PlayerDeathRPC
+  - UpgradePlayer2Weapon
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

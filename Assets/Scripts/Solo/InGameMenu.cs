@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 public class InGameMenu : MonoBehaviour
 {
     public GameObject LoginScreenUI;
@@ -22,6 +23,12 @@ public class InGameMenu : MonoBehaviour
     {
         LoginScreenUI.SetActive(false);
         RegisterScreenUI.SetActive(false);
+    }
+
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene("StartMenu", LoadSceneMode.Single);
     }
 
     public void GameExit()
