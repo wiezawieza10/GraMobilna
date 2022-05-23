@@ -9,27 +9,51 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenu.unity
     guid: 34723220c5ad59b43a84afdcb5750b04
   - enabled: 1
-    path: Assets/Scenes/MainStory.unity
+    path: Assets/Scenes/Solo/MainStory.unity
     guid: fbf887959820249449953f5aefbc79c9
   - enabled: 1
-    path: Assets/Scenes/Main.unity
+    path: Assets/Scenes/Solo/Main.unity
     guid: e26dda1754070f140a27e1c3d54b26c1
   - enabled: 1
-    path: Assets/Scenes/Dungeon1.unity
+    path: Assets/Scenes/Solo/Dungeon1.unity
     guid: ca5f7662ec233be4a921df149e33ebd9
   - enabled: 1
-    path: Assets/Scenes/Dungeon2.unity
+    path: Assets/Scenes/Solo/Dungeon2.unity
     guid: f9b3589c00304d14db84d3f83e7c1850
   - enabled: 1
-    path: Assets/Scenes/Dungeon3.unity
+    path: Assets/Scenes/Solo/Dungeon3.unity
     guid: a581ccd84d158354ea2710586da16932
   - enabled: 1
-    path: Assets/Scenes/Dungeon4.unity
+    path: Assets/Scenes/Solo/Dungeon4.unity
     guid: d06b2c6fdb41b4c488c192ba7b015b9e
   - enabled: 1
-    path: Assets/Scenes/EndScene.unity
+    path: Assets/Scenes/Solo/EndScene.unity
     guid: b47409d4e1032fb4fa4cb125de848958
   - enabled: 1
-    path: Assets/Scenes/EndStory.unity
+    path: Assets/Scenes/Solo/EndStory.unity
     guid: e0737689fe8e5ce4b9cadec790a52cf5
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer/Dungeon1_Multiplayer.unity
+    guid: 0677b23c9298b494e8bd3330a3f61151
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer/Dungeon2_Multiplayer.unity
+    guid: cd01ca9576da0494cb4794b22ad6bfa2
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer/Dungeon3_Multiplayer.unity
+    guid: d3127532fa6f6f645b77f3a12fac0606
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer/Dungeon4_Multiplayer.unity
+    guid: 57585381f9078644ba323794cf62ee5c
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer/EndScene_Multiplayer.unity
+    guid: 1a5cdaf5b1707554f99437e1dddaf125
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer/EndStory_Multiplayer.unity
+    guid: d05d976d60520aa4d9ee8ffdaff54372
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer/Main_Multiplayer.unity
+    guid: 616ace543d6735040ab7133139b6d629
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer/MainStory_Multiplayer.unity
+    guid: 581fb43b69dc24f44af4ae3127a0a350
   m_configObjects: {}
