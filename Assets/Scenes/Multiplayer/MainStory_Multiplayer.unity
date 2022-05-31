@@ -700,10 +700,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1073729430}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 062d35189bc92504e8a7956c3a3325b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f291fb1592fcdd4e8b220f8d54ad9db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Main
+  sceneName: Main_Multiplayer
 --- !u!4 &1073729432
 Transform:
   m_ObjectHideFlags: 0

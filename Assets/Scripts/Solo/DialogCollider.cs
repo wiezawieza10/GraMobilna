@@ -9,7 +9,7 @@ public class DialogCollider : Collidable
     public GameObject DialogColliderObject;
     protected override void OnCollide(Collider2D coll)
     {
-        if (coll.tag == "Fighter" && coll.name == "Player")
+        if (coll.tag == "Fighter" && coll.name.Contains("Player"))
         {
             Debug.Log("DIALOG");
             DialogColliderObject.SetActive(false);

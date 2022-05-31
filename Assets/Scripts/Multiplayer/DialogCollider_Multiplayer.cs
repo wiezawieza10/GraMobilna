@@ -2,25 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-public class HealingFountain_Multiplayer : Collidable
-{
-    public int healingAmount = 1;
-    private float healCooldown = 1.0f;
-    private float lastHeal;
-    PhotonView view;
 
+public class DialogCollider_Multiplayer : Collidable
+{
+    public GameObject DialogueBox;
+    public GameObject DialogManager;
+    public GameObject DialogColliderObject;
+    PhotonView view;
     private void Awake()
     {
         view = GetComponent<PhotonView>();
     }
-
     protected override void OnCollide(Collider2D coll)
     {
         if (coll.tag == "Fighter" && coll.name.Contains("Player") && coll.gameObject == GameManager_Multiplayer.instance.currentPlayer)
-            if (Time.time - lastHeal > healCooldown)
+        {
+            Debug.Log("DIALOG");
+            if(view.IsMine)
             {
-                lastHeal = Time.time;
-                GameManager_Multiplayer.instance.Heal(healingAmount);
+                DialogColliderObject.SetActive(false);
+                DialogueBox.SetActive(true);
+                DialogManager.SetActive(true);
             }
+        }
     }
 }

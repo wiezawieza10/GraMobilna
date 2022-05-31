@@ -2042,10 +2042,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 568862346}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 062d35189bc92504e8a7956c3a3325b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f291fb1592fcdd4e8b220f8d54ad9db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: EndStory
+  sceneName: EndStory_Multiplayer
 --- !u!4 &568862348
 Transform:
   m_ObjectHideFlags: 0
@@ -3002,8 +3002,8 @@ GameObject:
   - component: {fileID: 1744175946}
   - component: {fileID: 1744175945}
   - component: {fileID: 1744175944}
-  - component: {fileID: 1744175947}
   - component: {fileID: 1744175948}
+  - component: {fileID: 1744175947}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3085,7 +3085,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1744175943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 394fbee83c42df346ae3b12ec890502e, type: 3}
+  m_Script: {fileID: 11500000, guid: cadf39de521275b48852aec5de1d172e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boundX: 0.55

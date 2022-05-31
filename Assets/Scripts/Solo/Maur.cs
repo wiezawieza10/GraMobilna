@@ -7,11 +7,11 @@ public class Maur : MonoBehaviour
     private void OnDestroy()
     {
         Destroy(GameObject.Find("HUD"));
-        Destroy(GameObject.Find("Player"));
+        Destroy(GameManager_Multiplayer.instance.player);
+        Destroy(GameManager_Multiplayer.instance.player2);
         Destroy(GameObject.Find("GameManager"));
         Destroy(GameObject.Find("InGameMenu"));
         Destroy(GameObject.Find("FloatingTextManager"));
         Destroy(GameObject.Find("UserStatisticsMenu"));
-        SceneManager.LoadScene("EndScene", LoadSceneMode.Single);
     }
 }

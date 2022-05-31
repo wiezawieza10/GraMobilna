@@ -70,11 +70,8 @@ public class Enemy_Multiplayer : Mover_Multiplayer
     protected override void Death()
     {
         view.RPC("EnemyDeathRPC", RpcTarget.AllBuffered);
-        if(view.IsMine)
-        {
-            FindObjectOfType<AudioManager>().Play("enemyDeath");
-            GameManager_Multiplayer.instance.GrantXp(xpValue);
-        }
+        FindObjectOfType<AudioManager>().Play("enemyDeath");
+        GameManager_Multiplayer.instance.GrantXp(xpValue);
     }
 
     [PunRPC]

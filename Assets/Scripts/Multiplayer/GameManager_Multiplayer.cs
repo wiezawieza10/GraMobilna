@@ -14,6 +14,7 @@ public class GameManager_Multiplayer : MonoBehaviour
     public Player_Multiplayer player;
     public Player_Multiplayer player2;
     public Weapon_Multiplayer weapon;
+    public Weapon_Multiplayer weapon2;
     public LevelLoader_Multiplayer levelLoader;
     public FloatingTextManager floatingTextManager;
     public RectTransform hitpointBar;
@@ -22,6 +23,7 @@ public class GameManager_Multiplayer : MonoBehaviour
     public GameObject inGameMenu;
     public Animator deathMenu;
     public bool isAttackButtonDown;
+    public bool player2isAttackButtonDown;
     public bool notInDialog;
     public string currMap;
     public string savedMap;
@@ -153,7 +155,7 @@ public class GameManager_Multiplayer : MonoBehaviour
             return;
         }
 
-            var players = FindObjectsOfType<Player_Multiplayer>();
+        var players = FindObjectsOfType<Player_Multiplayer>();
         if (players.Length > 0 )
             for (var i =0; i < players.Length; ++i)
                 players[i].transform.position = GameObject.Find("SpawnPoint").transform.position;
@@ -195,7 +197,13 @@ public class GameManager_Multiplayer : MonoBehaviour
             for (var i = 0; i < weapons.Length; ++i)
             {
                 if (weapons[i].GetComponentInParent<PhotonView>().IsMine)
+                {
                     weapon = weapons[i];
+                }
+                else
+                    weapon2 = weapons[i];
+
+
             }
         else
             weapon = FindObjectOfType<Weapon_Multiplayer>();
@@ -222,4 +230,5 @@ public class GameManager_Multiplayer : MonoBehaviour
 
         }
     }
+
 }

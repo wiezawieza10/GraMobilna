@@ -28,12 +28,18 @@ public class Weapon_Multiplayer : Collidable
     protected override void Update()
     {
         base.Update();
-        if (GameManager_Multiplayer.instance.isAttackButtonDown == true)
+        if (GameManager_Multiplayer.instance.isAttackButtonDown == true && this.gameObject.GetComponentInParent<Player_Multiplayer>().view.IsMine)
             if (Time.time - lastSwing > cooldown)
             {
                 lastSwing = Time.time;
                 Swing();
             }
+
+        if(GameManager_Multiplayer.instance.player2isAttackButtonDown == true && !this.gameObject.GetComponentInParent<Player_Multiplayer>().view.IsMine)
+        {
+            Swingp2();
+            GameManager_Multiplayer.instance.player2isAttackButtonDown = false;
+        }
     }
 
     protected override void OnCollide(Collider2D coll)
@@ -55,8 +61,14 @@ public class Weapon_Multiplayer : Collidable
     }
     private void Swing()
     {
+        GameManager_Multiplayer.instance.player.view.RPC("SwingRPC", RpcTarget.Others);
         anim.SetTrigger("Swing");
         FindObjectOfType<AudioManager>().Play("swing1");
+    }
+
+    private void Swingp2()
+    {
+        anim.SetTrigger("Swing");
     }
 
     public void UpgradeWeapon()
@@ -64,7 +76,7 @@ public class Weapon_Multiplayer : Collidable
         weaponLevel++;
         GameManager_Multiplayer.instance.weaponLevele = weaponLevel;
         spriteRenderer.sprite = GameManager_Multiplayer.instance.weaponSprites[weaponLevel];
-        GameManager_Multiplayer.instance.player.view.RPC("UpgradePlayer2Weapon", RpcTarget.OthersBuffered, weaponLevel);
+        GameManager_Multiplayer.instance.player.view.RPC("UpgradePlayer2Weapon", RpcTarget.All, weaponLevel);
         FindObjectOfType<AudioManager>().Play("weaponUpgrade");
     }
 

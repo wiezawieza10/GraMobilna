@@ -95,7 +95,14 @@ public class Player_Multiplayer : Mover_Multiplayer
     [PunRPC]
     public void UpgradePlayer2Weapon(int level)
     {
+        Debug.Log("UpgradePlayer2Weapon");
         GameManager_Multiplayer.instance.SetPlayer();
-        GameManager_Multiplayer.instance.player2.GetComponentInChildren<SpriteRenderer>().sprite = GameManager_Multiplayer.instance.weaponSprites[level];
+        GameManager_Multiplayer.instance.weapon2.spriteRenderer.sprite = GameManager_Multiplayer.instance.weaponSprites[level];
+    }
+
+    [PunRPC]
+    public void SwingRPC()
+    {
+        GameManager_Multiplayer.instance.player2isAttackButtonDown = true;
     }
 }
