@@ -18,12 +18,9 @@ public class DialogCollider_Multiplayer : Collidable
         if (coll.tag == "Fighter" && coll.name.Contains("Player") && coll.gameObject == GameManager_Multiplayer.instance.currentPlayer)
         {
             Debug.Log("DIALOG");
-            if(view.IsMine)
-            {
-                DialogColliderObject.SetActive(false);
-                DialogueBox.SetActive(true);
-                DialogManager.SetActive(true);
-            }
+            DialogColliderObject.SetActive(false);
+            DialogueBox.SetActive(true);
+            DialogManager.SetActive(true);
         }
     }
 }

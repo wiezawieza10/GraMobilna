@@ -171,8 +171,13 @@ public class GameManager_Multiplayer : MonoBehaviour
         PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().name);
         player.GetComponent<PhotonView>().RPC("Respawn", RpcTarget.AllBuffered);
     }
+    public void ColorPlayer()
+    {
+        var sprite = player2.GetComponent<SpriteRenderer>();
+        sprite.color = new Color(255, 153, 250, 255);
+    }
 
-    public void SetPlayer()
+        public void SetPlayer()
     {
         
         var players = FindObjectsOfType<Player_Multiplayer>();
@@ -218,6 +223,17 @@ public class GameManager_Multiplayer : MonoBehaviour
             player.currentHealth = player.maxHealth;
         ShowText("+" + healingAmount.ToString() + "hp", 25, Color.green, player.transform.position, Vector3.up * 30, 1.0f);
         OnHitpointChange();
+        player.view.RPC("HealPlayer2", RpcTarget.OthersBuffered, healingAmount);
+    }
+    public void HealPlayer2(int healingAmount)
+    {
+        if (player2.currentHealth == player2.maxHealth)
+            return;
+
+        player2.currentHealth += healingAmount;
+        if (player2.currentHealth > player2.maxHealth)
+            player2.currentHealth = player2.maxHealth;
+        ShowText("+" + healingAmount.ToString() + "hp", 25, Color.green, player2.transform.position, Vector3.up * 30, 1.0f);
     }
     public void usePotion(int healingAmount)
     {

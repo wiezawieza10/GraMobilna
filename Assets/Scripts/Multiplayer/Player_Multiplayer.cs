@@ -17,6 +17,7 @@ public class Player_Multiplayer : Mover_Multiplayer
         spriteRenderer = GetComponent<SpriteRenderer>();
         joystick = FindObjectOfType<Joystick>();
         GameManager_Multiplayer.instance.SetPlayer();
+        GameManager_Multiplayer.instance.ColorPlayer();
     }
 
     protected override void ReceiveDamage(Damage dmg)
@@ -32,6 +33,7 @@ public class Player_Multiplayer : Mover_Multiplayer
     {
         view.RPC("PlayerDeathRPC", RpcTarget.AllBuffered);
     }
+
     [PunRPC]
     private void PlayerDeathRPC()
     {
@@ -104,5 +106,11 @@ public class Player_Multiplayer : Mover_Multiplayer
     public void SwingRPC()
     {
         GameManager_Multiplayer.instance.player2isAttackButtonDown = true;
+    }
+
+    [PunRPC]
+    public void HealPlayer2(int healingAmount)
+    {
+        GameManager_Multiplayer.instance.HealPlayer2(healingAmount);
     }
 }

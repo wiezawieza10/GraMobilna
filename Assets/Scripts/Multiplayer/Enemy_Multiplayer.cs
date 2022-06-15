@@ -37,17 +37,20 @@ public class Enemy_Multiplayer : Mover_Multiplayer
             {
                 if (!collidingWithPlayer)
                 {
-                    UpdateMotor((playerTransform.position - transform.position).normalized);
+                    //UpdateMotor((playerTransform.position - transform.position).normalized);
+                    view.RPC("UpdateMotorRPC", RpcTarget.AllBuffered, (playerTransform.position - transform.position).normalized);
                 }
             }
             else
             {
-                UpdateMotor(startingPosition - transform.position);
+                //UpdateMotor(startingPosition - transform.position);
+                view.RPC("UpdateMotorRPC", RpcTarget.AllBuffered, startingPosition - transform.position);
             }
         }
         else
         {
-            UpdateMotor(startingPosition - transform.position);
+            //UpdateMotor(startingPosition - transform.position);
+            view.RPC("UpdateMotorRPC", RpcTarget.AllBuffered, startingPosition - transform.position);
             chasing = false;
         }
 
@@ -91,5 +94,11 @@ public class Enemy_Multiplayer : Mover_Multiplayer
     private void EnemyFlipFalse()
     {
         transform.localScale = Vector3.one;
+    }
+
+    [PunRPC]
+    private void UpdateMotorRPC(Vector3 input)
+    {
+        UpdateMotor(input);
     }
 }
